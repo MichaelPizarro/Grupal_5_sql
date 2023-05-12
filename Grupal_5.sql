@@ -1,8 +1,10 @@
+/*Parte 1*/
 create database telovendo_5;
 use telovendo_5;
 create user 'admintienda5'@'localhost'identified by '123';
 grant all privileges on *.* to 'admintienda5'@'localhost';
 
+/*Parte 2*/
 create table usuario (
 id_usuario integer primary key auto_increment,
 nombre varchar (90) not null,
@@ -20,11 +22,12 @@ fecha_hora_ingreso datetime default now(),
 foreign key (id_usuario) references usuario (id_usuario)
 );
 
-ALTER TABLE usuario ALTER zona_horaria set default 'UTC-2';
+/*Parte 3*/
+alter table usuario alter zona_horaria set default 'UTC-2';
 select *from usuario;
-select *from ingreso;
 
 
+/*Parte 4*/
 insert into usuario (nombre, apellido, contrasenia, genero, telefono_de_contacto) values ('Pepe','Perez', '123', 'masculino', '+5698127310');
 insert into usuario (nombre, apellido, contrasenia, genero, telefono_de_contacto) values ('Pepa','Perez', '122', 'femenino', '+5698127876');
 insert into usuario (nombre, apellido, contrasenia, genero, telefono_de_contacto) values ('Elvis', 'Tec', '124', 'masculino', '+5691836916');
@@ -43,6 +46,14 @@ insert into ingreso (id_ingreso, id_usuario) values (6, 5);
 insert into ingreso (id_ingreso, id_usuario) values (7, 7);
 insert into ingreso (id_ingreso, id_usuario) values (8, 8);
 
+/*Actualizar columna fecha_hora_ingreso de la tabla ingreso*/
+SET time_zone = "-03:00";
+select now();
+
+update ingreso set fecha_hora_ingreso = convert_tz(now(),"-03:00","-02:00");
+select *from ingreso;
+
+/*Parte 5*/
 /*Justifique cada tipo de dato utilizado. ¿Es el optimo en cada caso?
 En el id de cada tabla utilizamos integer que sirve para almacenar valores numericos, 
 ya que hacemos referencia a la llave primaria que posee un carecter independiente, debido a que es lo mas optimo.
@@ -51,6 +62,7 @@ ya que es coherente al nombre del campo (nombre, apellido, numero de telefono, e
 Tambien, usamos llaves foraneas para aquellas tablas que consideramos dependientes de las que asignamos primarias.
 Finalmente, ocupamos la palabra reservada auto_increment en el id_usuario para optimizar el ingreso de datos.*/
 
+/*Parte 6*/
 create table contactos (
 id_contacto integer primary key,
 id_usuario integer,
@@ -61,7 +73,9 @@ foreign key (id_usuario) references usuario (id_usuario)
 
 select *from contactos;
 
-ALTER TABLE usuario DROP COLUMN telefono_de_contacto;
+/*Parte 7*/
+alter table usuario drop column telefono_de_contacto;
 
+/*El ejercicio debe ser subido a github y al Nodo Virtual*/
 /*https://github.com/MichaelPizarro/Grupal_5_sql*/
 
