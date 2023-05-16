@@ -1,4 +1,4 @@
-Integrantes:  Michael Pizarro - Nelson Toledo - Gabriel Silva - Rebeca Gatica
+/*Integrantes:  Michael Pizarro - Nelson Toledo - Gabriel Silva - Rebeca Gatica*/
 
 /*Parte 1*/
 create database telovendo_5;
